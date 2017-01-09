@@ -15,14 +15,14 @@ boid_y_velocities=[random.uniform(-20.0,20.0) for x in range(Num_boids)]
 boids=(boids_x,boids_y,boid_x_velocities,boid_y_velocities)
 
 def update_boids(boids):
-    x_pos,y_pos,x_vel,y_vel=boids #Change to more descriptive variable names.
+    x_pos,y_pos,x_vel,y_vel=boids   #Changed variables to more descriptive variable names.
     
     # Fly towards the middle
     for i in range(Num_boids):   #This code is repeated.
         for j in range(Num_boids):
             x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*0.01/len(xs)# Remove hardcoded numbers.
-    for i in range(Numboids):
-        for j in range(Numboids):
+    for i in range(Num_boids):
+        for j in range(Num_boids):
             y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*0.01/len(xs)
             
     # Fly away from nearby boids
@@ -36,8 +36,8 @@ def update_boids(boids):
     for i in range(Num_boids):
         for j in range(Num_boids):
             if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < 10000:
-                x_vel[i]=x_vel[i]+(x_vel[j]-x_vel[i])*0.125/len(xs)
-                y_vel[i]=y_vel[i]+(y_vel[j]-y_vel[i])*0.125/len(xs)
+                x_vel[i]=x_vel[i]+(x_vel[j]-x_vel[i])*0.125/len(x_pos)
+                y_vel[i]=y_vel[i]+(y_vel[j]-y_vel[i])*0.125/len(x_pos)
                 
     # Move according to velocities
     for i in range(Num_boids):
